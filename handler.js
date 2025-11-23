@@ -1,4 +1,4 @@
-import { smsg } from "./lib/simple.js" 
+import { smsg } from "./lib/simple.js"
 import { format } from "util"
 import { fileURLToPath } from "url"
 import path, { join } from "path"
@@ -6,32 +6,28 @@ import fs, { unwatchFile, watchFile } from "fs"
 import chalk from "chalk"
 import fetch from "node-fetch"
 import ws from "ws"
+
 const { proto } = (await import("@whiskeysockets/baileys")).default
 const isNumber = x => typeof x === "number" && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function () {
 clearTimeout(this)
 resolve()
 }, ms))
+
 export async function handler(chatUpdate) {
 this.msgqueque = this.msgqueque || []
 this.uptime = this.uptime || Date.now()
-if (!chatUpdate) {
-return
-}
+if (!chatUpdate) return
 this.pushMessage(chatUpdate.messages).catch(console.error)
 let m = chatUpdate.messages[chatUpdate.messages.length - 1]
-if (!m) {
-return
-}
+if (!m) return
 if (global.db.data == null) await global.loadDatabase()
 try {
 m = smsg(this, m) || m
-if (!m) {
-return
-}
+if (!m) return
 m.exp = 0
 try {
-const user = global.db.data.users[m.sender]
+let user = global.db.data.users[m.sender]
 if (typeof user !== "object") global.db.data.users[m.sender] = {}
 if (user) {
 if (!("name" in user)) user.name = m.name
@@ -74,7 +70,7 @@ afk: -1,
 afkReason: "",
 warn: 0
 }
-const chat = global.db.data.chats[m.chat]
+let chat = global.db.data.chats[m.chat]
 if (typeof chat !== "object") global.db.data.chats[m.chat] = {}
 if (chat) {
 if (!("isBanned" in chat)) chat.isBanned = false
@@ -103,7 +99,7 @@ nsfw: false,
 economy: true,
 gacha: true
 }
-const settings = global.db.data.settings[this.user.jid]
+let settings = global.db.data.settings[this.user.jid]
 if (typeof settings !== "object") global.db.data.settings[this.user.jid] = {}
 if (settings) {
 if (!("self" in settings)) settings.self = false
@@ -148,6 +144,7 @@ const botGroup = (m.isGroup ? participants.find((u) => conn.decodeJid(u.jid) == 
 const isRAdmin = userGroup?.admin == "superadmin" || false
 const isAdmin = isRAdmin || userGroup?.admin == "admin" || false
 const isBotAdmin = botGroup?.admin || false
+
 const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), "./plugins")
 for (const name in global.plugins) {
 const plugin = global.plugins[name]
@@ -203,9 +200,9 @@ __filename,
 user,
 chat,
 settings
-})) {
+}))
 continue
-}}
+}
 if (typeof plugin !== "function") {
 continue
 }
@@ -225,8 +222,10 @@ cmd.test(command) : cmd === command) :
 typeof plugin.command === "string" ?
 plugin.command === command : false
 global.comando = command
+
 if (!isOwners && settings.self) return
 if ((m.id.startsWith("NJX-") || (m.id.startsWith("BAE5") && m.id.length === 16) || (m.id.startsWith("B24E") && m.id.length === 20))) return
+
 if (global.db.data.chats[m.chat].primaryBot && global.db.data.chats[m.chat].primaryBot !== this.user.jid) {
 const primaryBotConn = global.conns.find(conn => conn.user.jid === global.db.data.chats[m.chat].primaryBot && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
 const participants = m.isGroup ? (await this.groupMetadata(m.chat).catch(() => ({ participants: [] }))).participants : []
@@ -237,15 +236,16 @@ throw !1
 global.db.data.chats[m.chat].primaryBot = null
 }} else {
 }
+
 if (!isAccept) continue
 m.plugin = name
-if (isAccept) { global.db.data.users[m.sender].commands = (global.db.data.users[m.sender].commands || 0) + 1 }
+global.db.data.users[m.sender].commands++
 if (chat) {
 const botId = this.user.jid
 const primaryBotId = chat.primaryBot
 if (name !== "group-banchat.js" && chat?.isBanned && !isROwner) {
 if (!primaryBotId || primaryBotId === botId) {
-const aviso = `ꕥ El bot *${botname}* está desactivado en este grupo\n\n> ✦ Un *administrador* puede activarlo con el comando:\n> » *${usedPrefix}bot on*`.trim()
+const aviso = `ꕥ El bot *${botname}* está desactivado en este grupo\n\n>  ✿  Un *administrador* puede activarlo con el comando:\n> » *${usedPrefix}bot on*`.trim()
 await m.reply(aviso)
 return
 }}
@@ -278,15 +278,13 @@ continue
 if (plugin.group && !m.isGroup) {
 fail("group", m, this)
 continue
-} else if (plugin.botAdmin && !isBotAdmin) {
+} 
+if (plugin.botAdmin && !isBotAdmin) {
 fail("botAdmin", m, this)
 continue
-} else if (plugin.admin && !isAdmin) {
+} 
+if (plugin.admin && !isAdmin) {
 fail("admin", m, this)
-continue
-}
-if (plugin.private && m.isGroup) {
-fail("private", m, this)
 continue
 }
 m.isCommand = true
@@ -336,9 +334,9 @@ const quequeIndex = this.msgqueque.indexOf(m.id || m.key.id)
 if (quequeIndex !== -1)
 this.msgqueque.splice(quequeIndex, 1)
 }
-let user, stats = global.db.data.stats
+let user = global.db.data.users[m.sender]
 if (m) {
-if (m.sender && (user = global.db.data.users[m.sender])) {
+if (m.sender && user) {
 user.exp += m.exp
 }}
 try {
@@ -347,17 +345,14 @@ if (!opts["noprint"]) await (await import("./lib/print.js")).default(m, this)
 console.warn(err)
 console.log(m.message)
 }}}
+
 global.dfail = (type, m, conn) => {
 const msg = {
-rowner: `『✦』El comando *${comando}* solo puede ser usado por los creadores del bot.`, 
-owner: `『✦』El comando *${comando}* solo puede ser usado por los desarrolladores del bot.`, 
-mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores del bot.`, 
-premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`, 
-group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
-private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
-admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
-botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
-restrict: `『✦』Esta caracteristica está desactivada.`
+rowner: `『 ✿ 』El comando *${comando}* solo puede ser usado por los creadores del bot.`,
+premium: `『 ✿ 』El comando *${comando}* solo puede ser usado por los usuarios premium.`,
+group: `『 ✿ 』El comando *${comando}* solo puede ser usado en grupos.`,
+admin: `『 ✿ 』El comando *${comando}* solo puede ser usado por los administradores del grupo.`,
+botAdmin: `『 ✿ 』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`
 }[type]
 if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
 }
