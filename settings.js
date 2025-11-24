@@ -8,18 +8,18 @@ import fs from "fs"
 
 //BETA: Si quiere evitar escribir el número que será bot en la consola, agregué desde aquí entonces:
 //Sólo aplica para opción 2 (ser bot con código de texto de 8 digitos)
-global.botNumber = "" //Ejemplo: 573218138672
+global.botNumber = "5492604631960" //Ejemplo: 573218138672
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.owner = [
-"59169082575",
-"59169214837",
-"59169082575"
+"5492604849203",
+"5492604631960",
+"5493772406612"
 ]
 
-global.suittag = ["59169082575"] 
-global.prems = []
+global.suittag = ['5493772406612', '5492604849203'] 
+global.prems = ['5493772406612', '5492604849203']
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
@@ -32,23 +32,23 @@ global.YotsubaJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.botname = "✿Yotsuba Wa Bot✿"
-global.textbot = "✿Yotsuba Wa Bot Powered @Alba070503✿ "
-global.dev = "© ⍴᥆ᥕᥱrᥱძ ᑲᥡ 𝙰𝚕𝚋𝚊𝟶𝟽𝟶𝟻𝟶𝟹"
-global.author = "© mᥲძᥱ ᥕі𝗍һ ᑲᥡ 𝙰𝚕𝚋𝚊𝟶𝟽𝟶𝟻𝟶𝟹"
-global.etiqueta = "𝙰𝚕𝚋𝚊𝟶𝟽𝟶𝟻𝟶𝟹"
-global.currency = "¥otsucoins"
-global.banner = "https://qu.ax/iBlgz.jpg"
-global.icono = "https://qu.ax/zRNgk.jpg"
+global.botname = "ᴀꜱᴀᴋᴜʀᴀ ᴍᴀᴏ ʙᴏᴛ 👑"
+global.textbot = "ᴀꜱᴀᴋᴜʀᴀ ᴍᴀᴏ ʙᴏᴛ 👑 "
+global.dev = "ᴀꜱᴀᴋᴜʀᴀ ᴍᴀᴏ ʙᴏᴛ 👑"
+global.author = "ᴀꜱᴀᴋᴜʀᴀ ᴍᴀᴏ ʙᴏᴛ 👑"
+global.etiqueta = "Sticker"
+global.currency = "Futacoins"
+global.banner = "https://cdn.polyspeak.ai/speakmaster/ac7fbc8034850c8c80679b6396bc3e41.webp"
+global.icono = "https://imagedelivery.net/LBWXYQ-XnKSYxbZ-NuYGqQ/c6f72d7c-03f9-4bb5-5e9c-ee9100ef7800/avatarhd"
 global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.group = "https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04"
-global.community = "https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04"
-global.channel = "https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04"
-global.github = "https://github.com/Alba070503/YotsubaBot-MD"
-global.gmail = "Alba070503yt@gmail.com"
+global.group = ""
+global.community = ""
+global.channel = ""
+global.github = ""
+global.gmail = ""
 //*_____________________________
 
 global.ch = {
