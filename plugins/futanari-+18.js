@@ -7,7 +7,7 @@ url, null, `*_ACA TIENES UNA RICA FUTANARI SOLA 🔥_*`, m)
 }
 handler.help = ['futanari']
 handler.tags = ['nsfw']
-handler.command = /^(futasolo|futanarisolo)$/i
+handler.command = ['futasolo', 'futanarisolo']
 handler.group = true;
 export default handler
 
